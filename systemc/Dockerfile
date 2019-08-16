@@ -29,10 +29,7 @@ RUN git clone https://gitlab.larc-nthu.net/rgly/scml.git \
     && mkdir scml/build \
     && mkdir /opt/scml \
     && cd scml \
-    && sed -i -e 's/g++-5\.2\.0/g++-5\.2\.0 \| g++-8/g' ./configure.in \
-    && sed -i -e 's/c++11/c++14/g' ./configure.in \
-    && sed -i -e '25s/^/#include \<sstream\>/' src/scml2_base/callback_observers_owner.h \
-    && autoconf \
+    && sh scml_patch.sh \
     && cd build \
     && ../configure --prefix=/opt/scml --with-systemc=/opt/systemc-2.3.3 \
     && make install -j4 \
